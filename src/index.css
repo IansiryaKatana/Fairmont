@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fairmont PM Design System - Deep Forest Green + White */
+
+/* Fairmont PM Design System - Deep Forest Green + White */
+
+@layer base {
+  :root {
+    /* Core brand colors - Deep Forest Green #1c4218 with white */
+    --background: 0 0% 100%;
+    --foreground: 114 53% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 114 53% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 114 53% 11%;
+
+    /* Primary: Deep Forest Green #1c4218 */
+    --primary: 114 53% 18%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Primary variations */
+    --primary-light: 114 45% 25%;
+    --primary-lighter: 114 35% 35%;
+    --primary-dark: 114 60% 12%;
+    --primary-darker: 114 65% 8%;
+
+    /* Secondary: Soft sage green */
+    --secondary: 114 20% 94%;
+    --secondary-foreground: 114 53% 11%;
+
+    /* Muted tones */
+    --muted: 114 10% 96%;
+    --muted-foreground: 114 10% 45%;
+
+    /* Accent: Warm off-white / cream */
+    --accent: 40 30% 96%;
+    --accent-foreground: 114 53% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 114 15% 88%;
+    --input: 114 15% 88%;
+    --ring: 114 53% 18%;
+
+    --radius: 0.5rem;
+
+    /* Custom tokens */
+    --hero-overlay: linear-gradient(to bottom, hsl(114 53% 11% / 0.4) 0%, hsl(114 53% 11% / 0.6) 100%);
+    --card-shadow: 0 4px 20px -2px hsl(114 53% 11% / 0.08);
+    --card-shadow-hover: 0 12px 40px -4px hsl(114 53% 11% / 0.15);
+    --glow-primary: 0 0 40px hsl(114 53% 18% / 0.2);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 114 53% 11%;
+    --sidebar-primary: 114 53% 18%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 114 20% 94%;
+    --sidebar-accent-foreground: 114 53% 11%;
+    --sidebar-border: 114 15% 88%;
+    --sidebar-ring: 114 53% 18%;
+  }
+
+  .dark {
+    --background: 114 53% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 114 53% 9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 114 53% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 114 53% 11%;
+
+    --primary-light: 114 45% 25%;
+    --primary-lighter: 114 35% 35%;
+    --primary-dark: 114 60% 12%;
+    --primary-darker: 114 65% 8%;
+
+    --secondary: 114 30% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 114 30% 15%;
+    --muted-foreground: 114 15% 60%;
+
+    --accent: 114 30% 20%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 114 30% 18%;
+    --input: 114 30% 18%;
+    --ring: 0 0% 100%;
+
+    --sidebar-background: 114 53% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 114 53% 11%;
+    --sidebar-accent: 114 30% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 114 30% 15%;
+    --sidebar-ring: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold tracking-tight;
+    font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+  
+  a, button, [role="button"], input, textarea, select {
+    cursor: none !important;
+  }
+}
