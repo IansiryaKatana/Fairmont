@@ -1,22 +1,16 @@
-# Welcome to your Lovable project
+# Fairmont PM - Construction Consulting & Project Management
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/815f1efa-3c70-4569-9740-f21b31bf497e
+**Developed by**: [Ian katana](https://Ianakatana.com)
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/815f1efa-3c70-4569-9740-f21b31bf497e) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +56,14 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/815f1efa-3c70-4569-9740-f21b31bf497e) and click on Share -> Publish.
+You can deploy this project using various hosting platforms like Vercel, Netlify, or any other static hosting service.
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain to my project?
 
 Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+To connect a domain, follow the deployment platform's instructions for custom domain setup.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+
+**Developed by**: [Ian katana](https://Ianakatana.com)
