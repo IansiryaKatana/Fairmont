@@ -39,6 +39,7 @@ export function CTASection({
   description = "Ready to bring your construction vision to life? Our expert team is here to guide you through every step of your project, from initial concept to final completion.",
   backgroundImage = "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200&fit=crop"
 }: CTASectionProps) {
+
   return (
     <section className="pt-12 md:pt-16 pb-4 p-3">
       {/* Main Container - Primary Color with Padding (Acts as Frame) */}

@@ -1,14 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useMouseParallax } from "@/hooks/use-mouse-parallax";
 import { Navbar } from "@/components/layout/Navbar";
+import heroVideo from "@/assets/hero video fairmont.mp4";
 
-const heroImages = [
-  "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop",
-  "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop",
-  "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop",
-  "https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop",
+type HeroMedia = {
+  type: "video" | "image";
+  src: string;
+};
+
+const heroMedia: HeroMedia[] = [
+  { type: "video", src: heroVideo },
+  { type: "image", src: "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop" },
+  { type: "image", src: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop" },
+  { type: "image", src: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop" },
+  { type: "image", src: "https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop" },
 ];
 
 const letterVariants = {
@@ -25,25 +32,36 @@ const letterVariants = {
 };
 
 export function HeroSection() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const title = "Fairmont PM";
   const parallax = useMouseParallax(15);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+      setCurrentMediaIndex((prev) => (prev + 1) % heroMedia.length);
     }, 6000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (heroMedia[currentMediaIndex].type === "video") {
+        videoRef.current.play().catch(console.error);
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [currentMediaIndex]);
 
   return (
     <section className="relative min-h-screen p-3">
       {/* Premium Container with Border Radius */}
       <div className="relative w-full h-[calc(100vh-24px)] rounded-2xl overflow-hidden">
-        {/* Background Image Carousel with Parallax */}
+        {/* Background Media Carousel with Parallax */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentImageIndex}
+            key={currentMediaIndex}
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
@@ -53,11 +71,23 @@ export function HeroSection() {
               transform: `translate(${parallax.x}px, ${parallax.y}px) scale(1.05)`,
             }}
           >
-            <img
-              src={heroImages[currentImageIndex]}
-              alt="Construction project"
-              className="w-full h-full object-cover"
-            />
+            {heroMedia[currentMediaIndex].type === "video" ? (
+              <video
+                ref={videoRef}
+                src={heroMedia[currentMediaIndex].src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <img
+                src={heroMedia[currentMediaIndex].src}
+                alt="Construction project"
+                className="w-full h-full object-cover"
+              />
+            )}
           </motion.div>
         </AnimatePresence>
 
@@ -139,14 +169,14 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Image Indicators */}
+        {/* Media Indicators */}
         <div className="absolute bottom-8 right-8 flex gap-2">
-          {heroImages.map((_, index) => (
+          {heroMedia.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentImageIndex(index)}
+              onClick={() => setCurrentMediaIndex(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentImageIndex
+                index === currentMediaIndex
                   ? "bg-white w-8"
                   : "bg-white/40 hover:bg-white/60"
               }`}

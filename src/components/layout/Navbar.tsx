@@ -8,11 +8,11 @@ import fairmontLogoWhite from "@/assets/fairmont-logo-white.png";
 import fairmontLogoColored from "@/assets/fairmont-logo-colored.png";
 
 const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Projects" },
   { href: "/blog", label: "Insights" },
-  { href: "/contact", label: "Contact" },
 ];
 
 interface NavbarProps {
@@ -66,44 +66,52 @@ export function Navbar({ variant = "transparent", insideHero = false }: NavbarPr
           </Link>
 
           {/* Desktop Navigation - Far Right */}
-          <div className="hidden lg:flex items-center gap-[15px]">
-            {navLinks.map((link) => (
+          <div className="hidden lg:flex items-center">
+            {/* Bubble container for nav items and button */}
+            <div className={cn(
+              "flex items-center gap-1.5 px-3 py-2 rounded-xl",
+              "bg-white/10 backdrop-blur-md",
+              "shadow-[0_2px_8px_rgba(0,0,0,0.08)]",
+              isTransparent ? "bg-white/10" : "bg-white/20"
+            )}>
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.href || 
+                  (link.href === "/" && location.pathname === "/");
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className={cn(
+                      "text-sm font-medium tracking-wider transition-all relative py-2 px-3",
+                      "font-sans",
+                      isActive
+                        ? "bg-[hsl(var(--nav-active))] text-[hsl(var(--nav-active-foreground))] font-semibold rounded-xl"
+                        : "rounded-lg",
+                      !isActive && isTransparent
+                        ? "text-white/80 hover:text-white hover:bg-white/10"
+                        : !isActive && "text-foreground/70 hover:text-foreground hover:bg-white/40"
+                    )}
+                    style={{ fontFamily: "'Inter Tight', system-ui, sans-serif" }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+
+              {/* CTA Button */}
               <Link
-                key={link.href}
-                to={link.href}
+                to="/contact"
                 className={cn(
-                  "text-sm font-medium tracking-wider transition-all relative py-2 px-3 rounded-md",
-                  "font-sans",
-                  isTransparent
-                    ? "text-white/80 hover:text-white"
-                    : "text-foreground/70 hover:text-foreground",
-                  location.pathname === link.href &&
-                    (isTransparent ? "text-white" : "text-primary")
+                  "rounded-xl py-2 px-3 font-medium tracking-wider text-sm ml-1",
+                  "bg-white text-primary hover:bg-[hsl(var(--nav-active))] hover:text-white",
+                  "transition-all duration-200 font-sans h-auto inline-flex items-center justify-center",
+                  "text-sm font-medium"
                 )}
                 style={{ fontFamily: "'Inter Tight', system-ui, sans-serif" }}
               >
-                {location.pathname === link.href && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className={cn(
-                      "absolute inset-0 rounded-md -z-10",
-                      isTransparent ? "bg-white/20" : "bg-primary/10"
-                    )}
-                  />
-                )}
-                {link.label}
+                Talk To Us
               </Link>
-            ))}
-
-            {/* CTA Button */}
-            <Button
-              asChild
-              variant={isTransparent ? "hero-outline" : "outline"}
-              size="sm"
-              className="rounded-full px-6 font-medium tracking-wider text-xs ml-4"
-            >
-              <Link to="/contact">Talk to our team</Link>
-            </Button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -130,24 +138,38 @@ export function Navbar({ variant = "transparent", insideHero = false }: NavbarPr
             className="lg:hidden bg-white/95 backdrop-blur-md border-b border-border"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "text-base font-medium py-2 transition-colors tracking-wider",
-                    location.pathname === link.href
-                      ? "text-primary"
-                      : "text-foreground/70 hover:text-foreground"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Button asChild size="lg" className="mt-4 rounded-full">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.href || 
+                  (link.href === "/" && location.pathname === "/");
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "text-base font-medium py-2.5 px-4 transition-all tracking-wider font-sans",
+                      isActive
+                        ? "bg-[hsl(var(--nav-active))] text-[hsl(var(--nav-active-foreground))] font-semibold rounded-xl"
+                        : "text-foreground/70 hover:text-foreground rounded-lg"
+                    )}
+                    style={{ fontFamily: "'Inter Tight', system-ui, sans-serif" }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+              <Button
+                asChild
+                size="lg"
+                className={cn(
+                  "mt-4 rounded-full font-bold font-sans",
+                  "bg-white text-primary hover:bg-[hsl(var(--nav-active))] hover:text-white",
+                  "transition-all duration-200"
+                )}
+                style={{ fontFamily: "'Inter Tight', system-ui, sans-serif" }}
+              >
                 <Link to="/contact" onClick={() => setIsOpen(false)}>
-                  Talk to our team
+                  Talk To Us
                 </Link>
               </Button>
             </div>

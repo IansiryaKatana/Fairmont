@@ -40,6 +40,10 @@
     --accent: 40 30% 96%;
     --accent-foreground: 114 53% 11%;
 
+    /* Active nav: Complementary orange/amber */
+    --nav-active: 35 85% 55%;
+    --nav-active-foreground: 0 0% 100%;
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
